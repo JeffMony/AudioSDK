@@ -1,0 +1,3 @@
+include ':soundtouch'
+include ':app'
+rootProject.name = "AudioSDK"
