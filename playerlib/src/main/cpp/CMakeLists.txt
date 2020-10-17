@@ -72,13 +72,13 @@ find_library( # Sets the name of the path variable.
 target_link_libraries( # Specifies the target library.
         nativeplayer
 
-        libavcodec
         libavfilter
-        libavformat
-        libavutil
         libpostproc
         libswresample
         libswscale
+        libavcodec
+        libavformat
+        libavutil
 
         # Links the target library to the log library
         # included in the NDK.

@@ -14,7 +14,6 @@ CallJava::CallJava(JavaVM *vm, JNIEnv *env, jobject *jobj) {
         LOGE("Get jclass failed");
         return;
     }
-
     jmid_prepared = env->GetMethodID(jcls, "onPrepared", "()V");
 }
 

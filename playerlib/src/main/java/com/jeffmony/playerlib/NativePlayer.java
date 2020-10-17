@@ -2,6 +2,7 @@ package com.jeffmony.playerlib;
 
 import android.text.TextUtils;
 
+import com.jeffmony.playerlib.listener.OnPrepareListener;
 import com.jeffmony.playerlib.utils.LogUtils;
 
 public class NativePlayer {
@@ -17,10 +18,15 @@ public class NativePlayer {
         System.loadLibrary("swscale");
     }
 
+    private OnPrepareListener mListener;
     private String mUrl;
 
     public void setDataSource(String url) {
         mUrl = url;
+    }
+
+    public void setOnPreparedListener(OnPrepareListener listener) {
+        mListener = listener;
     }
 
     public void prepare() {
@@ -32,9 +38,15 @@ public class NativePlayer {
         new Thread(new Runnable() {
             @Override
             public void run() {
-
+                n_prepare(mUrl);
             }
         }).start();
+    }
+
+    public void onPrepared() {
+        if (mListener != null) {
+            mListener.onPrepared();
+        }
     }
 
     private native void n_prepare(String url);

@@ -31,6 +31,7 @@ Java_com_jeffmony_playerlib_NativePlayer_n_1prepare(JNIEnv *env, jobject jobj, j
         }
         ffmpegImpl = new FFmpegImpl(callJava, url);
     }
+    ffmpegImpl->prepare();
 
-    env->ReleaseStringChars(jurl, url);
+    env->ReleaseStringUTFChars(jurl, url);
 }

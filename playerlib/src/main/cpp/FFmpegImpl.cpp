@@ -41,10 +41,32 @@ void FFmpegImpl::decodeFFmpegThread() {
             if (audio == NULL) {
                 audio = new Audio();
                 audio->streamIndex = i;
+                audio->codec_par = pFmt->streams[i]->codecpar;
+
             }
         }
     }
 
+    AVCodec *decode = avcodec_find_decoder(audio->codec_par->codec_id);
+    if (!decode) {
+        LOGE("Cannot get decoder, %d", audio->codec_par->codec_id);
+        return;
+    }
 
+    audio->codecContext = avcodec_alloc_context3(decode);
+    if (!audio->codecContext) {
+        LOGE("Cannot alloc avcodec context");
+        return;
+    }
+    int ret = avcodec_parameters_to_context(audio->codecContext, audio->codec_par);
+    if (ret < 0) {
+        LOGE("Cannot fill context to decoder");
+        return;
+    }
+    if (avcodec_open2(audio->codecContext, decode, 0) != 0) {
+        LOGE("Cannot open audio stream");
+        return;
+    }
+    callJava->onCallPrepared(CHILD_THREAD);
 
 }
