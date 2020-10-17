@@ -28,6 +28,7 @@ public:
 
     void prepare();
     void decodeFFmpegThread();
+    void start();
 };
 
 #endif //AUDIOSDK_FFMPEGIMPL_H

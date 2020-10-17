@@ -49,5 +49,19 @@ public class NativePlayer {
         }
     }
 
+    public void start() {
+        if (TextUtils.isEmpty(mUrl)) {
+            LogUtils.w("Current Url is Empty");
+            return;
+        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                n_start();
+            }
+        }).start();
+    }
+
     private native void n_prepare(String url);
+    private native void n_start();
 }

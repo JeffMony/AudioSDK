@@ -70,3 +70,32 @@ void FFmpegImpl::decodeFFmpegThread() {
     callJava->onCallPrepared(CHILD_THREAD);
 
 }
+
+void FFmpegImpl::start() {
+    if (audio == NULL) {
+        LOGE("audio is null");
+        return;
+    }
+    int count = 0;
+    while(1) {
+        AVPacket *packet = av_packet_alloc();
+        if (av_read_frame(pFmt, packet) == 0) {
+            if (packet->stream_index == audio->streamIndex) {
+                count++;
+                LOGI("解码第 %d 帧", count);
+
+
+
+                av_packet_free(&packet);
+                av_free(packet);
+                packet = NULL;
+            }
+        } else {
+            LOGE("av_read_frame failed or end");
+            av_packet_free(&packet);
+            av_free(packet);
+            packet = NULL;
+            break;
+        }
+    }
+}

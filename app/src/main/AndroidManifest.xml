@@ -22,6 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".SoundTouchActivity" />
+        <activity android:name=".AudioPlayerActivity" />
     </application>
 
 </manifest>

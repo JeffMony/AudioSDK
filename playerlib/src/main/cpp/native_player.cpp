@@ -15,7 +15,7 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm ,void *reserved) {
     jint result = -1;
     javaVm = vm;
     JNIEnv *env;
-    if (vm->GetEnv(reinterpret_cast<void **>(env), JNI_VERSION_1_6) != JNI_OK) {
+    if (vm->GetEnv(reinterpret_cast<void **>(&env), JNI_VERSION_1_6) != JNI_OK) {
         return result;
     }
     return JNI_VERSION_1_6;
@@ -32,6 +32,12 @@ Java_com_jeffmony_playerlib_NativePlayer_n_1prepare(JNIEnv *env, jobject jobj, j
         ffmpegImpl = new FFmpegImpl(callJava, url);
     }
     ffmpegImpl->prepare();
+}
 
-    env->ReleaseStringUTFChars(jurl, url);
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_jeffmony_playerlib_NativePlayer_n_1start(JNIEnv *env, jobject thiz) {
+    if (ffmpegImpl != NULL) {
+        ffmpegImpl->start();
+    }
 }
