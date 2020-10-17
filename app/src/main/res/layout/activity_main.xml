@@ -1,138 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/linearLayout1"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical" >
-
-    <TableLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
-
-        <TableRow
-            android:id="@+id/tableRow1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tempo %:"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <EditText
-                android:id="@+id/editTextTempo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="5"
-                android:inputType="text"
-                android:text="100" >
-            </EditText>
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/tableRow2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Pitch half-steps:"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <EditText
-                android:id="@+id/editTextPitch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="5"
-                android:inputType="text"
-                android:text="-0.318" >
-            </EditText>
-        </TableRow>
-    </TableLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Source file:"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <EditText
-            android:id="@+id/editTextSrcFileName"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="/sdcard/Download/test.wav"
-            android:layout_weight="1" />
-
-
-        <Button
-            android:id="@+id/buttonSelectSrcFile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Select" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Output file:"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <EditText
-            android:id="@+id/editTextOutFileName"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="/sdcard/Download/soundtouch-output.wav"
-            android:layout_weight="1" />
-
-        <Button
-            android:id="@+id/buttonSelectOutFile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Select" />
-    </LinearLayout>
-
-    <CheckBox
-        android:id="@+id/checkBoxPlay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Play the output file after processing!" />
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
+    <Button
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="20sp"
+        android:text="C++线程模式"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <Button
-        android:id="@+id/buttonProcess"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Process file!" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Status console:"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <ScrollView
-        android:id="@+id/scrollView1"
+        android:textSize="20sp"
+        android:text="生产者消费模式"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/textViewResult"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent" />
+    <Button
+        android:textSize="20sp"
+        android:text="C++回调Java"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
+    <Button
+        android:textSize="20sp"
+        android:text="soundtouch 例子"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
-    </ScrollView>
+    <Button
+        android:textSize="20sp"
+        android:text="播放音频"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
