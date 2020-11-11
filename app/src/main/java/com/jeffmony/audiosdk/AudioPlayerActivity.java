@@ -34,7 +34,7 @@ public class AudioPlayerActivity extends AppCompatActivity implements View.OnCli
 
     private void doPlay() {
         final NativePlayer player = new NativePlayer();
-        player.setDataSource("/sdcard/Download/source.wav");
+        player.setDataSource("/sdcard/Download/audio/source.wav");
         player.setOnPreparedListener(new OnPrepareListener() {
             @Override
             public void onPrepared() {

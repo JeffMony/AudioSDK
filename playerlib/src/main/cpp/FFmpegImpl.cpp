@@ -60,7 +60,7 @@ void FFmpegImpl::decodeFFmpegThread() {
     }
     int ret = avcodec_parameters_to_context(audio->codecContext, audio->codec_par);
     if (ret < 0) {
-        LOGE("Cannot fill context to decoder");
+        LOGE("Cannot fill decoder paramters to codec context");
         return;
     }
     if (avcodec_open2(audio->codecContext, decode, 0) != 0) {
@@ -91,6 +91,7 @@ void FFmpegImpl::start() {
                 packet = NULL;
             }
         } else {
+            //可能是解码失败或者解码到末尾了
             LOGE("av_read_frame failed or end");
             av_packet_free(&packet);
             av_free(packet);

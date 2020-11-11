@@ -11,9 +11,9 @@ extern "C" {
 
 class Audio {
 public:
-    int streamIndex = -1;
-    AVCodecParameters *codec_par;
-    AVCodecContext *codecContext = NULL;
+    int streamIndex = -1;                         //音频流索引
+    AVCodecParameters *codec_par;                 //解码参数
+    AVCodecContext *codecContext = NULL;          //解码器上下文
 
 public:
     Audio();
