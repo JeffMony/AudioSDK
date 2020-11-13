@@ -8,6 +8,7 @@
 #include "CallJava.h"
 #include "pthread.h"
 #include "Audio.h"
+#include "PlayerStatus.h"
 
 extern "C" {
 #include "libavformat/avformat.h"
@@ -21,9 +22,10 @@ public:
 
     AVFormatContext *pFmt = NULL;
     Audio *audio = NULL;
+    PlayerStatus *status_ = NULL;
 
 public:
-    FFmpegImpl(CallJava *callJava, const char *url);
+    FFmpegImpl(CallJava *callJava, const char *url, PlayerStatus *status);
     ~FFmpegImpl();
 
     void prepare();

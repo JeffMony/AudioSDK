@@ -4,8 +4,9 @@
 
 #include "Audio.h"
 
-Audio::Audio() {
-
+Audio::Audio(PlayerStatus *status) {
+    status_ = status;
+    queue_ = new CustomQueue(status);
 }
 
 Audio::~Audio() {

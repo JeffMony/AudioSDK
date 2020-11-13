@@ -5,10 +5,12 @@
 #include "androidlog.h"
 #include "CallJava.h"
 #include "FFmpegImpl.h"
+#include "PlayerStatus.h"
 
 JavaVM *javaVm = NULL;
 CallJava *callJava = NULL;
 FFmpegImpl *ffmpegImpl = NULL;
+PlayerStatus *status_ = NULL;
 
 extern "C"
 JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm ,void *reserved) {
@@ -29,7 +31,8 @@ Java_com_jeffmony_playerlib_NativePlayer_n_1prepare(JNIEnv *env, jobject jobj, j
         if (callJava == NULL) {
             callJava = new CallJava(javaVm, env, &jobj);
         }
-        ffmpegImpl = new FFmpegImpl(callJava, url);
+        status_ = new PlayerStatus();
+        ffmpegImpl = new FFmpegImpl(callJava, url, status_);
     }
     ffmpegImpl->prepare();
 }

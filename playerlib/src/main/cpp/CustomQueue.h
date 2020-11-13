@@ -12,6 +12,7 @@ extern "C" {
 #include "pthread.h"
 #include "queue"
 #include "PlayerStatus.h"
+#include "androidlog.h"
 
 class CustomQueue {
 
@@ -19,14 +20,17 @@ public:
     std::queue<AVPacket *> packetQueue;
     pthread_mutex_t  packetMuxtex;
     pthread_cond_t packetCond;
+    PlayerStatus *status_ = NULL;
 
 public:
-    CustomQueue();
+    CustomQueue(PlayerStatus *status);
     ~CustomQueue();
 
     int addQueue(AVPacket* packet);
 
     int getQueue(AVPacket* packet);
+
+    int getSize();
 };
 
 

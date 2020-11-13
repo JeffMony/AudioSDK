@@ -4,9 +4,10 @@
 
 #include "FFmpegImpl.h"
 
-FFmpegImpl::FFmpegImpl(CallJava *callJava, const char *url) {
+FFmpegImpl::FFmpegImpl(CallJava *callJava, const char *url, PlayerStatus *status) {
     this->callJava = callJava;
     this->url = url;
+    this->status_ = status;
 }
 
 FFmpegImpl::~FFmpegImpl() {
@@ -39,7 +40,7 @@ void FFmpegImpl::decodeFFmpegThread() {
     for (int i = 0; i < pFmt->nb_streams; i++) {
         if (pFmt->streams[i]->codecpar->codec_type == AVMEDIA_TYPE_AUDIO) {
             if (audio == NULL) {
-                audio = new Audio();
+                audio = new Audio(status_);
                 audio->streamIndex = i;
                 audio->codec_par = pFmt->streams[i]->codecpar;
 
@@ -83,12 +84,7 @@ void FFmpegImpl::start() {
             if (packet->stream_index == audio->streamIndex) {
                 count++;
                 LOGI("解码第 %d 帧", count);
-
-
-
-                av_packet_free(&packet);
-                av_free(packet);
-                packet = NULL;
+                audio->queue_->addQueue(packet);
             }
         } else {
             //可能是解码失败或者解码到末尾了
@@ -99,4 +95,13 @@ void FFmpegImpl::start() {
             break;
         }
     }
+
+    while(audio->queue_->getSize() > 0) {
+        AVPacket *packet = av_packet_alloc();
+        audio->queue_->getQueue(packet);
+        av_packet_free(&packet);
+        av_free(packet);
+        packet = NULL;
+    }
+    LOGE("解码完成\n");
 }
